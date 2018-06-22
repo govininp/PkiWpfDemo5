@@ -1,0 +1,72 @@
+﻿<Window x:Class="PkiWpfDemo5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PkiWpfDemo5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="950">
+  <StackPanel Margin="3" Background="Beige">
+    <Label Content="Certificate Services" Height="auto" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold"/>
+    <StackPanel Margin="3" Orientation="Horizontal">
+      <StackPanel  Margin="3" Orientation="Vertical" Width="236">
+        <Label Content="Select Certificate" Height="50" HorizontalAlignment="Center" FontSize="24" FontWeight="DemiBold"/>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="67*" />
+            <ColumnDefinition Width="133*"/>
+          </Grid.ColumnDefinitions>
+
+          <Label x:Name="SenderLabel" Grid.Row="0" Grid.Column="0" Content="Sender"/>
+          <TextBox x:Name ="SenderText" Grid.Row="0" Grid.Column="1" TextAlignment="Right" VerticalContentAlignment="Center" Padding="0,0,5,0" Text="{Binding Path=OneSalesItem.Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+          <Label  x:Name="ReceiverLabel" Grid.Row="1" Grid.Column="0" Content="Receiver"/>
+          <TextBox x:Name ="ReceiverText" Grid.Row="1" Grid.Column="1" TextAlignment="Right" VerticalContentAlignment="Center" Padding="0,0,5,0" Text="{Binding Path=OneSalesItem.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        </Grid>
+        <Button  x:Name="SubmitBtn" Height="auto" Margin="15" Content="Submit" Padding="10" HorizontalAlignment="Stretch" FontSize="16" FontWeight="Bold" />
+
+      </StackPanel>
+
+      <StackPanel Margin="10,5,10,5" Orientation="Vertical">
+        <Label Content="Plain Text" HorizontalAlignment="Center" FontSize="24" FontWeight="DemiBold"/>
+        <TextBlock Name="PlainTextBox" Margin ="2,2,2,2" FontSize="12" Height="200" Width ="300" Background ="White" Foreground="Red" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" >
+          Enter the text you want to by encrypted by the Sender using the Receiver's public key, and signed using the Sender's private key
+        </TextBlock>
+        
+        <StackPanel Margin="1,0,0,1" Orientation="Vertical">
+          <Label x:Name ="ReceiverPublicKeyLabel" Content="Receiver Public Key" HorizontalAlignment="Center" FontSize="18"/>
+          <TextBox x:Name ="ReceiverPublicKeyText" IsReadOnly="True"  Height="30" VerticalAlignment="Center"  VerticalContentAlignment="Center" Padding="0,0,1,0" HorizontalAlignment="Stretch" TextAlignment="Right" Text="{Binding Path=TotalAmountToCollect, StringFormat= {}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+        </StackPanel>
+        <StackPanel>
+          <Button  x:Name="EncryptButton" Height="auto" Margin="15" Content="Encrypt" Padding="10" HorizontalAlignment="Stretch" FontSize="16" FontWeight="Bold" />
+        </StackPanel>
+      </StackPanel>
+
+      <StackPanel  Margin="3" Orientation="Vertical">
+        <Label Content="Cipher Text" HorizontalAlignment="Center" FontSize="24" FontWeight="DemiBold"/>
+
+        <TextBlock Name="CipherTextBox" Margin ="2,2,2,2" FontSize="12" Height="200" Width ="300" Background ="White" Foreground="Red" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" >
+          The Encrypted Text using the Receiver's public key could be decrypt using the Receiver's Private Key. And verfy the Encryped Text came from the Sender by generating the same signature.
+        </TextBlock>
+
+        <StackPanel Margin="1,0,0,1" Orientation="Vertical">
+          <Label x:Name ="SenderPublicKeyLabel" Content="Sender Public Key" HorizontalAlignment="Center" FontSize="18"/>
+          <TextBox x:Name ="SenderPublicKeyText" IsReadOnly="True"  Height="30" VerticalAlignment="Center"  VerticalContentAlignment="Center" Padding="0,0,1,0" HorizontalAlignment="Stretch" TextAlignment="Right" Text="{Binding Path=TotalAmountToCollect, StringFormat= {}{0:C}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+        </StackPanel>
+        <StackPanel>
+          <Button  x:Name="DecryptButton" Height="auto" Margin="15" Content="Decrypt" Padding="10" HorizontalAlignment="Stretch" FontSize="16" FontWeight="Bold" />
+        </StackPanel>
+      </StackPanel>
+     
+    </StackPanel>
+  </StackPanel>
+</Window>
